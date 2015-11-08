@@ -7,18 +7,19 @@ import com.appodeal.ads.VideoCallbacks;
 import android.app.Activity;
 import android.util.Log;
 
-public class GodotAppedeal extends Godot.SingletonBase
+public class GodotAppodeal extends Godot.SingletonBase
 {
     //variable
     private Activity activity = null;
+    String appKey = "";
+    
+    static public Godot.SingletonBase initialize(Activity p_activity) {
 
-    static public Godot.SingletonBase initialize(Activity p_activity)
-    {
-        return new GodotAppodeal(p_activity);
-    }
+		return new GodotAppodeal(p_activity);
+	}
 
     //constructor
-    public void GodotAppodeal(Activity p_activity)
+    public GodotAppodeal(Activity p_activity)
     {
         //The registratiosion of this and its functions
         registerClass("Appodeal", new String[]{
@@ -31,190 +32,160 @@ public class GodotAppedeal extends Godot.SingletonBase
     }
 
     //initialization of appodeal
-    public void init(String key,String type)
+    public void init(final String key, final String type)
     {
+        
         activity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
 
                 //check string to see if it is a test or a normal initialization or a spacific initialization
+                if(type.equals("test"))
+                {
+                    Appodeal.setTesting(true);
+                    appKey = key;
+                    Appodeal.initialize(activity, appKey);
+                }
+                else if(type.equals("normal"))
+                {
+                    appKey = key;
+                    Appodeal.initialize(activity, appKey);
+                }
+                else if(type.equals("banner"))
+                {
+                    appKey = key;
+                    Appodeal.initialize(activity, appKey, Appodeal.BANNER);
+                }
+                else if(type.equals("video"))
+                {
+                    appKey = key;
+                    Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
+                }
+                else if(type.equals("insterstitial"))
+                {
+                    appKey = key;
+                    Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
+                }
+                else if(type.equals("interstitial/video"))
+                {
+                    appKey = key;
+                    Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+                }
+                else
+                {
+                    Log.d("godot","Did not find a initialization type for :" + type);
+                }
+                /*
                 switch (type) {
 
                     case "test":
                         Appodeal.setTesting(true);
-                        String appKey = key;
-                        Appodeal.initialize(this, appKey);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey);
                         break;
                     case "normal":
-                        String appKey = key;
-                        Appodeal.initialize(this, appKey);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey);
                         break;
                     case "banner":
-                        String appKey = key;
-                        Appodeal.initialize(this, appKey, Appodeal.BANNER);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.BANNER);
                         break;
                     case "video":
-                        String appKey = key;
-                        Appodeal.initialize(this, appKey, Appodeal.VIDEO);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
                         break;
                     case "interstitial":
-                        String appKey = key;
-                        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
                         break;
-                    case "interstitial&video":
-                        String appKey = key;
-                        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+                    case "interstitial/video":
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
                         break;
                     default:
                         Log.d("godot","Did not find a initialization type for :" + type);
                         break;
-                }
+                }*/
             }
         });
     }
 
-    public void showBannerAd(String type)
+    public void showBannerAd( String type)
     {
 
-        activity.runOnUiThread(new Runnable()
-        {
+        if (type.equals("top")) {
 
-            @Override
-            public void run()
-            {
+            Appodeal.show(activity, Appodeal.BANNER_TOP);
+            Log.d("godot","show banner top");
+        }
+        else if (type.equals("center")) {
 
-                if (type == "top") {
+            Appodeal.show(activity, Appodeal.BANNER_CENTER);
+            Log.d("godot","show banner center");
+        }
+        else if(type.equals("bottom")) {
 
-                    Appodeal.show(this, Appodeal.BANNER_TOP);
-                    Log.d("godot","show banner top");
-                }
-                else if (type == "center") {
-
-                    Appodeal.show(this, Appodeal.BANNER_CENTER);
-                    Log.d("godot","show banner center");
-                }
-                else if(type == "buttom") {
-
-                    Appodeal.show(this, Appodeal.BANNER_BUTTOM);
-                    Log.d("godot","show banner buttom");
-                }
-                else{
-                    Log.d("godot","Did not find banner of type :" + type);
-                }
-            }
-        });
+            Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
+            Log.d("godot","show banner buttom");
+        }
+        else{
+            Log.d("godot","Did not find banner of type :" + type);
+        }
     }
 
     public void showVideoAd()
     {
 
-        activity.runOnUiThread(new Runnable()
-        {
+        Appodeal.show(activity, Appodeal.VIDEO);
+        Log.d("godot","show video");
 
-            @Override
-            public void run()
-            {
-                Appodeal.show(this, Appodeal.VIDEO);
-                Log.d("godot","show video");
-            }
-
-        });
     }
 
     public void showInterstitialAd()
     {
 
-        activity.runOnUiThread(new Runnable()
-        {
+        Appodeal.show(activity, Appodeal.INTERSTITIAL);
+        Log.d("godot","show interstitial");
 
-            @Override
-            public void run()
-            {
-                Appodeal.show(this, Appodeal.INTERSTITIAL);
-                Log.d("godot","show interstitial");
-            }
-
-        });
     }
 
     public void showInterstitialAndVideoAds()
     {
 
-        activity.runOnUiThread(new Runnable()
-        {
+        Appodeal.show(activity, Appodeal.VIDEO | Appodeal.INTERSTITIAL);
+        Log.d("godot","show video and interstitial");
 
-            @Override
-            public void run()
-            {
-                Appodeal.show(this, Appodeal.VIDEO | Appodeal.INTERSTITIAL);
-                Log.d("godot","show video and interstitial");
-            }
-
-        });
     }
 
     public void hideBannerAd()
     {
 
-        activity.runOnUiThread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                Appodeal.hide(this, Appodeal.BANNER);
-                Log.d("godot","hide banner");
-            }
-
-        });
+        Appodeal.hide(activity, Appodeal.BANNER);
+        Log.d("godot","hide banner");
     }
 
     public void hideVideoAd()
     {
 
-        activity.runOnUiThread(new Runnable()
-        {
+        Appodeal.hide(activity, Appodeal.VIDEO);
+        Log.d("godot","hide video");
 
-            @Override
-            public void run()
-            {
-                Appodeal.hide(this, Appodeal.VIDEO);
-                Log.d("godot","hide video");
-            }
-
-        });
     }
 
     public void hideInterstitialAd()
     {
 
-        activity.runOnUiThread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-               Appodeal.hide(this, Appodeal.INTERSTITIAL);
-               Log.d("godot","hide interstitial");
-            }
-
-        });
+        Appodeal.hide(activity, Appodeal.INTERSTITIAL);
+        Log.d("godot","hide interstitial");
     }
 
     public boolean isBannerLoaded()
     {
         boolean loaded;
 
-        activity.runOnUiThread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-              loaded = Appodeal.isLoaded(Appdeal.BANNER);
-            }
-        });
+        loaded = Appodeal.isLoaded(Appodeal.BANNER);
 
         return loaded;
     }
@@ -223,15 +194,7 @@ public class GodotAppedeal extends Godot.SingletonBase
     {
         boolean loaded;
 
-        activity.runOnUiThread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-               loaded = Appodeal.isLoaded(Appdeal.VIDEO);
-            }
-        });
+        loaded = Appodeal.isLoaded(Appodeal.VIDEO);
 
         return loaded;
     }
@@ -240,33 +203,17 @@ public class GodotAppedeal extends Godot.SingletonBase
     {
         boolean loaded;
 
-        activity.runOnUiThread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-              loaded = Appodeal.isLoaded(Appdeal.INTERSTITIAL);
-            }
-        });
-
+        loaded = Appodeal.isLoaded(Appodeal.INTERSTITIAL);
+         
         return loaded;
     }
 
     public boolean isAnyAdLoaded()
     {
         boolean loaded;
-
-        activity.runOnUiThread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                loaded = Appodeal.isLoaded(Appdeal.ANY);
-            }
-        });
-
+   
+        loaded = Appodeal.isLoaded(Appodeal.ANY);
+            
         return loaded;
     }
 }

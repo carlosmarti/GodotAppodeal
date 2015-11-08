@@ -10,4 +10,3 @@ def configure(env):
     env.android_module_library("android/sdk/chartboost-5.2.0.jar")
     env.android_module_library("android/sdk/my-target-4.0.13.jar")
     env.android_module_library("android/sdk/unity-ads-1.4.7.jar")
-    env.android_module_library("android/sdk/google-play-services.jar")
