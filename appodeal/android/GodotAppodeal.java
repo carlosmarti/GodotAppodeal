@@ -47,15 +47,15 @@ public class GodotAppodeal extends Godot.SingletonBase
                     appKey = key;
                     Appodeal.initialize(activity, appKey);
                 }
-                else if(type.equals("normal"))
-                {
-                    appKey = key;
-                    Appodeal.initialize(activity, appKey);
-                }
                 else if(type.equals("banner"))
                 {
                     appKey = key;
                     Appodeal.initialize(activity, appKey, Appodeal.BANNER);
+                }
+                else if(type.equals("banner/video"))
+                {
+                    appKey = key;
+                    Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.VIDEO);
                 }
                 else if(type.equals("video"))
                 {
@@ -76,38 +76,7 @@ public class GodotAppodeal extends Godot.SingletonBase
                 {
                     Log.d("godot","Did not find a initialization type for :" + type);
                 }
-                /*
-                switch (type) {
-
-                    case "test":
-                        Appodeal.setTesting(true);
-                        appKey = key;
-                        Appodeal.initialize(activity, appKey);
-                        break;
-                    case "normal":
-                        appKey = key;
-                        Appodeal.initialize(activity, appKey);
-                        break;
-                    case "banner":
-                        appKey = key;
-                        Appodeal.initialize(activity, appKey, Appodeal.BANNER);
-                        break;
-                    case "video":
-                        appKey = key;
-                        Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
-                        break;
-                    case "interstitial":
-                        appKey = key;
-                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
-                        break;
-                    case "interstitial/video":
-                        appKey = key;
-                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
-                        break;
-                    default:
-                        Log.d("godot","Did not find a initialization type for :" + type);
-                        break;
-                }*/
+                
             }
         });
     }
