@@ -43,7 +43,7 @@ public class GodotAppodeal extends Godot.SingletonBase
                 //check string to see if it is a test or a normal initialization or a spacific initialization
                 if(type.equals("test"))
                 {
-                    else if(adType.equals("banner"))
+                    if(adType.equals("banner"))
                     {
                         Appodeal.setTesting(true);
                         appKey = key;
