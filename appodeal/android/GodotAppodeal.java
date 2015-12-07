@@ -32,7 +32,7 @@ public class GodotAppodeal extends Godot.SingletonBase
     }
 
     //initialization of appodeal
-    public void init(final String key, final String type, final boolean testing = true)
+    public void init(final String key, final String type, final boolean testing)
     {
         
         activity.runOnUiThread(new Runnable() {
