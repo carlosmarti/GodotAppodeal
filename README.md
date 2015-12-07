@@ -8,7 +8,7 @@ Simply clone this repository put inside of the modules folder inside of godot so
 
 Avaliable Functions:
 ---------------------
-    appodeal.init(key,type) type = test,normal,banner,video,interstitial,interstitial/video
+    appodeal.init(key,type,testing) type = normal,banner,video,interstitial,interstitial/video
     
     appodeal.showBannerAd(type) This function requeres a banner type of the following (top, center, bottom)
     
