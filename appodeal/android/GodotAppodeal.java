@@ -32,44 +32,39 @@ public class GodotAppodeal extends Godot.SingletonBase
     }
 
     //initialization of appodeal
-    public void init(final String key, final String type)
+    public void init(final String key, final String type, final boolean testing = true)
     {
         
         activity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
-
+				appKey = key;
+				Appodeal.disableLocationPermissionCheck();
                 //check string to see if it is a test or a normal initialization or a spacific initialization
-                if(type.equals("test"))
+                if(testing)
                 {
                     Appodeal.setTesting(true);
-                    appKey = key;
-                    Appodeal.initialize(activity, appKey);
                 }
-                else if(type.equals("banner"))
+                
+                if(type.equals("banner"))
                 {
-                    appKey = key;
                     Appodeal.initialize(activity, appKey, Appodeal.BANNER);
                 }
                 else if(type.equals("banner/video"))
                 {
-                    appKey = key;
                     Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.VIDEO);
                 }
                 else if(type.equals("video"))
                 {
-                    appKey = key;
                     Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
                 }
                 else if(type.equals("insterstitial"))
                 {
-                    appKey = key;
                     Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
                 }
                 else if(type.equals("interstitial/video"))
                 {
-                    appKey = key;
                     Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
                 }
                 else
@@ -81,7 +76,7 @@ public class GodotAppodeal extends Godot.SingletonBase
         });
     }
 
-    public void showBannerAd( String type)
+    public void showBannerAd(String type)
     {
 
         if (type.equals("top")) {
