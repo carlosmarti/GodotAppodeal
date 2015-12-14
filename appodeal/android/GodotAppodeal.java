@@ -32,7 +32,7 @@ public class GodotAppodeal extends Godot.SingletonBase
     }
 
     //initialization of appodeal
-    public void init(final String key, final String type, final boolean testing)
+    public void init(final String key, final String type, final String adType)
     {
         
         activity.runOnUiThread(new Runnable() {
@@ -44,28 +44,83 @@ public class GodotAppodeal extends Godot.SingletonBase
                 //check string to see if it is a test or a normal initialization or a spacific initialization
                 if(testing)
                 {
-                    Appodeal.setTesting(true);
+                    if(adType.equals("banner"))
+                    {
+                        Appodeal.setTesting(true);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.BANNER);
+                    }
+                    else if(adType.equals("banner/video"))
+                    {
+                        Appodeal.setTesting(true);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.VIDEO);
+                    }
+                    else if(adType.equals("video"))
+                    {
+                        Appodeal.setTesting(true);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
+                    }
+                    else if(adType.equals("insterstitial"))
+                    {
+                        Appodeal.setTesting(true);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
+                    }
+                    else if(adType.equals("interstitial/video"))
+                    {
+                        Appodeal.setTesting(true);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+                    }
+                    else if(adType.equals("everything"))
+                    {
+                        Appodeal.setTesting(true);
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO | Appodeal.BANNER);
+                    }
+                    else
+                    {
+                        Log.d("godot","Did not find a initialization adType for :" + type);
+                    }
                 }
-                
-                if(type.equals("banner"))
+                else if(type.equals("normal"))
                 {
-                    Appodeal.initialize(activity, appKey, Appodeal.BANNER);
-                }
-                else if(type.equals("banner/video"))
-                {
-                    Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.VIDEO);
-                }
-                else if(type.equals("video"))
-                {
-                    Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
-                }
-                else if(type.equals("insterstitial"))
-                {
-                    Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
-                }
-                else if(type.equals("interstitial/video"))
-                {
-                    Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+                    if(adType.equals("banner"))
+                    {
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.BANNER);
+                    }
+                    else if(adType.equals("banner/video"))
+                    {
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.VIDEO);
+                    }
+                    else if(adType.equals("video"))
+                    {
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
+                    }
+                    else if(adType.equals("insterstitial"))
+                    {
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
+                    }
+                    else if(adType.equals("interstitial/video"))
+                    {
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+                    }
+                    else if(adType.equals("everything"))
+                    {
+                        appKey = key;
+                        Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO | Appodeal.BANNER);
+                    }
+                    else
+                    {
+                        Log.d("godot","Did not find a initialization adType for :" + type);
+                    }
                 }
                 else
                 {
