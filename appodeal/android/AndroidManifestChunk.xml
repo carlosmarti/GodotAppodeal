@@ -17,9 +17,9 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
 
-  <activity android:name="com.chartboost.sdk.CBImpressionActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:excludeFromRecents="true" />
+  <activity android:name="com.chartboost.sdk.CBImpressionActivity" android:excludeFromRecents="true"
+            android:hardwareAccelerated="true" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
 
   <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
             android:theme="@android:style/Theme.Translucent" />
@@ -38,22 +38,18 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent" />
 
-  <activity android:name="com.amazon.device.ads.AdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+  <activity android:name="com.amazon.device.ads.AdActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-  <activity android:name="com.unity3d.ads.android.view.UnityAdsFullscreenActivity"
-            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:hardwareAccelerated="true" />
-
-  <activity android:name="ru.mail.android.mytarget.ads.MyTargetActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+          <activity android:name="ru.mail.android.mytarget.ads.MyTargetActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
 
   <activity android:name="org.nexage.sourcekit.vast.activity.VASTActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+  <!--suppress AndroidDomInspection -->
+  <activity android:name="com.facebook.ads.InterstitialActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
 
-  <activity android:name="com.facebook.ads.InterstitialAdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+  <activity android:name="com.unity3d.ads.android.view.UnityAdsFullscreenActivity"
+            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:hardwareAccelerated="true" />
 
   <activity android:name="com.jirbo.adcolony.AdColonyOverlay"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -68,4 +64,43 @@
   <activity android:name="com.vungle.publisher.FullScreenAdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+  <activity android:name="com.startapp.android.publish.list3d.List3DActivity"
+            android:theme="@android:style/Theme" />
+  <!--suppress AndroidDomInspection -->
+  <activity android:name="com.startapp.android.publish.OverlayActivity"
+            android:theme="@android:style/Theme.Translucent"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+  <!--suppress AndroidDomInspection -->
+  <activity android:name="com.startapp.android.publish.FullScreenActivity"
+            android:theme="@android:style/Theme"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+  <service android:name="com.yandex.metrica.MetricaService" android:enabled="true"
+           android:exported="true" android:process=":Metrica">
+    <intent-filter>
+      <category android:name="android.intent.category.DEFAULT" />
+      <action android:name="com.yandex.metrica.IMetricaService" />
+      <data android:scheme="metrica" />
+    </intent-filter>
+    <meta-data android:name="metrica:api:level" android:value="32" />
+  </service>
+  <receiver android:name="com.yandex.metrica.MetricaEventHandler"
+            android:enabled="true" android:exported="true">
+    <intent-filter>
+      <action android:name="com.android.vending.INSTALL_REFERRER" />
+    </intent-filter>
+  </receiver>
+  <!--suppress AndroidDomInspection -->
+  <activity android:name="com.yandex.metrica.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+  <activity android:name="com.inmobi.rendering.InMobiAdActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" android:hardwareAccelerated="true" />
+  <receiver android:name="com.inmobi.commons.core.utilities.uid.ImIdShareBroadCastReceiver"
+            android:enabled="true" android:exported="true" >
+    <intent-filter>
+      <action android:name="com.inmobi.share.id" />
+    </intent-filter>
+  </receiver>
+  <service android:enabled="true" android:name="com.inmobi.signals.activityrecognition.ActivityRecognitionManager" />
+
       
