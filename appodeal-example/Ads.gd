@@ -12,7 +12,7 @@ func _ready():
 	if(Globals.has_singleton("Appodeal")):
 		key = "your key"
 		appodeal = Globals.get_singleton("Appodeal")
-		appodeal.init(key, "normal", "add your ad type here")
+		appodeal.init(get_instance_ID(), key, "add your ad type here", true)
 
 func showBannerAd(type):
 	appodeal.showBannerAd(type)
