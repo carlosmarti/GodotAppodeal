@@ -4,6 +4,7 @@ import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.InterstitialCallbacks;
 import com.appodeal.ads.VideoCallbacks;
+import com.appodeal.ads.RewardedVideoCallbacks;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,14 +14,14 @@ public class GodotAppodeal extends Godot.SingletonBase
     //variable
     private Activity activity = null;
     String appKey = "";
-	private int	instanceId = 0;
+    private int instanceId = 0;
     private boolean testing = true;
     private Toast toast;
     
     static public Godot.SingletonBase initialize(Activity p_activity) {
 
-		return new GodotAppodeal(p_activity);
-	}
+        return new GodotAppodeal(p_activity);
+    }
 
     //constructor
     public GodotAppodeal(Activity p_activity)
@@ -29,7 +30,8 @@ public class GodotAppodeal extends Godot.SingletonBase
         registerClass("Appodeal", new String[]{
 
                 "init","showBannerAd","showVideoAd","showInterstitialAd","showInterstitialAndVideoAds","hideBannerAd",
-                "hideVideoAd","hideInterstitialAd","isBannerLoaded","isVideoLoaded","isInterstitialLoaded","isAnyAdLoaded"
+                "hideVideoAd","hideInterstitialAd","isBannerLoaded","isVideoLoaded","isInterstitialLoaded","isAnyAdLoaded",
+                "isRewardedVideoLoaded", "showRewardedVideoAd" 
         });
 
         activity = p_activity;
@@ -44,8 +46,8 @@ public class GodotAppodeal extends Godot.SingletonBase
 
             @Override
             public void run() {
-				appKey = key;
-				Appodeal.disableLocationPermissionCheck();
+                appKey = key;
+                Appodeal.disableLocationPermissionCheck();
                 //check string to see if it is a test or a normal initialization or a spacific initialization
                 if(testing)
                 {
@@ -71,6 +73,14 @@ public class GodotAppodeal extends Godot.SingletonBase
                 else if(type.equals("interstitial/video"))
                 {
                     Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+                }
+                else if(type.equals("rewardedvideo"))
+                {
+                    Appodeal.initialize(activity, appKey, Appodeal.REWARDED_VIDEO);
+                }
+                else if(type.equals("banner/rewardedvideo"))
+                {
+                    Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
                 }
                 else
                 {
@@ -107,6 +117,12 @@ public class GodotAppodeal extends Godot.SingletonBase
     {
         Appodeal.show(activity, Appodeal.VIDEO);
         Log.d("godot","show video");
+    }
+
+    public void showRewardedVideoAd()
+    {
+        Appodeal.show(activity, Appodeal.REWARDED_VIDEO);
+        Log.d("godot","show rewarded video");
     }
 
     public void showInterstitialAd()
@@ -153,6 +169,13 @@ public class GodotAppodeal extends Godot.SingletonBase
         return loaded;
     }
 
+    public boolean isRewardedVideoLoaded()
+    {
+        boolean loaded;
+        loaded = Appodeal.isLoaded(Appodeal.REWARDED_VIDEO);
+        return loaded;
+    }
+
     public boolean isInterstitialLoaded()
     {
         boolean loaded;
@@ -168,34 +191,34 @@ public class GodotAppodeal extends Godot.SingletonBase
     }
 
 
-	private void enableCallBacks()
-	{
+    private void enableCallBacks()
+    {
 
-		Appodeal.setBannerCallbacks(new BannerCallbacks() {
-		    @Override
-		    public void onBannerLoaded() {
-    	       showToastOnTesting("onBannerLoaded");
-    	       GodotLib.calldeferred(instanceId, "_on_banner_loaded", new Object[]{});
-		    }
+        Appodeal.setBannerCallbacks(new BannerCallbacks() {
+            @Override
+            public void onBannerLoaded() {
+               showToastOnTesting("onBannerLoaded");
+               GodotLib.calldeferred(instanceId, "_on_banner_loaded", new Object[]{});
+            }
 
-		    @Override
-		    public void onBannerFailedToLoad() {
+            @Override
+            public void onBannerFailedToLoad() {
                 showToastOnTesting("onBannerFailedToLoad");
                 GodotLib.calldeferred(instanceId, "_on_banner_failed_to_load", new Object[]{});
-		    }
+            }
 
-		    @Override
-		    public void onBannerShown() {
+            @Override
+            public void onBannerShown() {
                 showToastOnTesting("onBannerShown");
                 GodotLib.calldeferred(instanceId, "_on_banner_shown", new Object[]{});
-		    }
+            }
 
-		    @Override
-		    public void onBannerClicked() {
+            @Override
+            public void onBannerClicked() {
                 showToastOnTesting("onBannerClicked");
                 GodotLib.calldeferred(instanceId, "_on_banner_clicked", new Object[]{});
-		    }
-  		});
+            }
+        });
 
 
         Appodeal.setVideoCallbacks(new VideoCallbacks() {
@@ -229,7 +252,39 @@ public class GodotAppodeal extends Godot.SingletonBase
                 GodotLib.calldeferred(instanceId, "_on_video_closed", new Object[]{});
             }
         });
-	}  
+
+        Appodeal.setRewardedVideoCallbacks(new RewardedVideoCallbacks() {
+            @Override
+            public void onRewardedVideoLoaded() {
+                showToastOnTesting("onRewardedVideoLoaded");
+                GodotLib.calldeferred(instanceId, "_on_rewarded_video_loaded", new Object[]{});
+            }
+
+            @Override
+            public void onRewardedVideoFailedToLoad() {
+                showToastOnTesting("onRewardedVideoFailedToLoad");
+                GodotLib.calldeferred(instanceId, "_on_rewarded_video_failed_to_load", new Object[]{});
+            }
+
+            @Override
+            public void onRewardedVideoShown() {
+                showToastOnTesting("onRewardedVideoShown");
+                GodotLib.calldeferred(instanceId, "_on_rewarded_video_shown", new Object[]{});
+            }
+
+            @Override
+            public void onRewardedVideoFinished(int amount, String name) {
+                showToastOnTesting(String.format("onRewardedVideoFinished. Reward: %d %s", amount, name));
+                GodotLib.calldeferred(instanceId, "_on_rewarded_video_finished", new Object[]{amount, name});
+            }
+
+            @Override
+            public void onRewardedVideoClosed() {
+                showToastOnTesting("onRewardedVideoClosed");
+                GodotLib.calldeferred(instanceId, "_on_rewarded_video_closed", new Object[]{});
+            }
+        });
+    }  
 
     private void showToastOnTesting(final String text) {
         if (!testing) {
