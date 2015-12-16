@@ -11,7 +11,7 @@ Avaliable Functions:
     appodeal.init(instanceId, key, type, testing)
     - integer instanceId => use get_instance_ID()
     - string key => your appodeal key
-    - string type => valid values: "banner", "video", "interstitial", "interstitial/video", "banner/video"
+    - string type => valid values: "banner", "video", "interstitial", "interstitial/video", "banner/video", "rewardedvideo", "banner/rewardedvideo"
     - boolean testing => indicates if you are testing your app or not
     
     appodeal.showBannerAd(type)
@@ -19,6 +19,8 @@ Avaliable Functions:
     
     appodeal.showVideoAd()
     
+    appodeal.showRewardedVideoAd()
+
     appodeal.showInterstitialAd()
     
     appodeal.showInterstitialAndVideoAds()
@@ -32,6 +34,8 @@ Avaliable Functions:
     appodeal.isBannerLoaded() Boolean
     
     appodeal.isVideoLoaded() Boolean
+
+    appodeal.isRewardedVideoLoaded() Boolean
     
     appodeal.isInterstitalLoaded() Boolean
     
@@ -56,6 +60,16 @@ Callback Functions:
     _on_video_finished()
     
     _on_video_closed()
+
+    _on_rewarded_video_loaded()
+
+    _on_rewarded_video_failed_to_load()
+
+    _on_rewarded_video_finished(amount, name)
+    - integer amount
+    - string name
+
+    _on_rewarded_video_closed
     
     
     
