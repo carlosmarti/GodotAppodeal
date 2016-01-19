@@ -1,4 +1,4 @@
-package com.android.godot;
+package org.godotengine.godot;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
