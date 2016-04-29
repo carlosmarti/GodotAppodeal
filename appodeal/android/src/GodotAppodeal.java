@@ -3,7 +3,7 @@ package org.godotengine.godot;
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.InterstitialCallbacks;
-import com.appodeal.ads.VideoCallbacks;
+import com.appodeal.ads.SkippableVideoCallbacks;
 import com.appodeal.ads.RewardedVideoCallbacks;
 import android.app.Activity;
 import android.util.Log;
@@ -60,11 +60,11 @@ public class GodotAppodeal extends Godot.SingletonBase
                 }
                 else if(type.equals("banner/video"))
                 {
-                    Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.VIDEO);
+                    Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.SKIPPABLE_VIDEO);
                 }
                 else if(type.equals("video"))
                 {
-                    Appodeal.initialize(activity, appKey, Appodeal.VIDEO);
+                    Appodeal.initialize(activity, appKey, Appodeal.SKIPPABLE_VIDEO);
                 }
                 else if(type.equals("insterstitial"))
                 {
@@ -72,7 +72,7 @@ public class GodotAppodeal extends Godot.SingletonBase
                 }
                 else if(type.equals("interstitial/video"))
                 {
-                    Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.VIDEO);
+                    Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO);
                 }
                 else if(type.equals("rewardedvideo"))
                 {
@@ -115,7 +115,7 @@ public class GodotAppodeal extends Godot.SingletonBase
 
     public void showVideoAd()
     {
-        Appodeal.show(activity, Appodeal.VIDEO);
+        Appodeal.show(activity, Appodeal.SKIPPABLE_VIDEO);
         Log.d("godot","show video");
     }
 
@@ -133,7 +133,7 @@ public class GodotAppodeal extends Godot.SingletonBase
 
     public void showInterstitialAndVideoAds()
     {
-        Appodeal.show(activity, Appodeal.VIDEO | Appodeal.INTERSTITIAL);
+        Appodeal.show(activity, Appodeal.SKIPPABLE_VIDEO | Appodeal.INTERSTITIAL);
         Log.d("godot","show video and interstitial");
     }
 
@@ -145,7 +145,7 @@ public class GodotAppodeal extends Godot.SingletonBase
 
     public void hideVideoAd()
     {
-        Appodeal.hide(activity, Appodeal.VIDEO);
+        Appodeal.hide(activity, Appodeal.SKIPPABLE_VIDEO);
         Log.d("godot","hide video");
     }
 
@@ -165,7 +165,7 @@ public class GodotAppodeal extends Godot.SingletonBase
     public boolean isVideoLoaded()
     {
         boolean loaded;
-        loaded = Appodeal.isLoaded(Appodeal.VIDEO);
+        loaded = Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO);
         return loaded;
     }
 
@@ -185,9 +185,20 @@ public class GodotAppodeal extends Godot.SingletonBase
 
     public boolean isAnyAdLoaded()
     {
-        boolean loaded;
-        loaded = Appodeal.isLoaded(Appodeal.ANY);
-        return loaded;
+        if (Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
+			return true;
+		}
+		if (Appodeal.isLoaded(Appodeal.BANNER)) {
+			return true;
+		}
+		if (Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO)) {
+			return true;
+		}
+		if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO)) {
+			return true;
+		}
+		
+		return false;
     }
 
 
@@ -221,33 +232,33 @@ public class GodotAppodeal extends Godot.SingletonBase
         });
 
 
-        Appodeal.setVideoCallbacks(new VideoCallbacks() {
+        Appodeal.setSkippableVideoCallbacks(new SkippableVideoCallbacks() {
             @Override
-            public void onVideoLoaded() {
+            public void onSkippableVideoLoaded() {
                 showToastOnTesting("onVideoLoaded");
                 GodotLib.calldeferred(instanceId, "_on_video_loaded", new Object[]{});
             }
 
             @Override
-            public void onVideoFailedToLoad() {
+            public void onSkippableVideoFailedToLoad() {
                 showToastOnTesting("onVideoFailedToLoad");
                 GodotLib.calldeferred(instanceId, "_on_video_failed_to_load", new Object[]{});
             }
 
             @Override
-            public void onVideoShown() {
+            public void onSkippableVideoShown() {
                 showToastOnTesting("onVideoShown");
                 GodotLib.calldeferred(instanceId, "_on_video_shown", new Object[]{});
             }
 
             @Override
-            public void onVideoFinished() {
+            public void onSkippableVideoFinished() {
                 showToastOnTesting("onVideoFinished");
                 GodotLib.calldeferred(instanceId, "_on_video_finished", new Object[]{});
             }
 
             @Override
-            public void onVideoClosed() {
+            public void onSkippableVideoClosed() {
                 showToastOnTesting("onVideoClosed");
                 GodotLib.calldeferred(instanceId, "_on_video_closed", new Object[]{});
             }
