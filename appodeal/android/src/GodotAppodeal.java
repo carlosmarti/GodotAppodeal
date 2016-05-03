@@ -60,10 +60,12 @@ public class GodotAppodeal extends Godot.SingletonBase
                 }
                 else if(type.equals("banner/video"))
                 {
+       		    Appodeal.confirm(Appodeal.SKIPPABLE_VIDEO);
                     Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.SKIPPABLE_VIDEO);
                 }
                 else if(type.equals("video"))
                 {
+                    Appodeal.confirm(Appodeal.SKIPPABLE_VIDEO);
                     Appodeal.initialize(activity, appKey, Appodeal.SKIPPABLE_VIDEO);
                 }
                 else if(type.equals("insterstitial"))
@@ -72,6 +74,7 @@ public class GodotAppodeal extends Godot.SingletonBase
                 }
                 else if(type.equals("interstitial/video"))
                 {
+                    Appodeal.confirm(Appodeal.SKIPPABLE_VIDEO);
                     Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO);
                 }
                 else if(type.equals("rewardedvideo"))
@@ -186,19 +189,19 @@ public class GodotAppodeal extends Godot.SingletonBase
     public boolean isAnyAdLoaded()
     {
         if (Appodeal.isLoaded(Appodeal.INTERSTITIAL)) {
-			return true;
-		}
-		if (Appodeal.isLoaded(Appodeal.BANNER)) {
-			return true;
-		}
-		if (Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO)) {
-			return true;
-		}
-		if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO)) {
-			return true;
-		}
+		return true;
+	}
+	if (Appodeal.isLoaded(Appodeal.BANNER)) {
+		return true;
+	}
+	if (Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO)) {
+		return true;
+	}
+	if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO)) {
+		return true;
+	}
 		
-		return false;
+	return false;
     }
 
 
