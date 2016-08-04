@@ -68,7 +68,7 @@ public class GodotAppodeal extends Godot.SingletonBase
                     Appodeal.confirm(Appodeal.SKIPPABLE_VIDEO);
                     Appodeal.initialize(activity, appKey, Appodeal.SKIPPABLE_VIDEO);
                 }
-                else if(type.equals("insterstitial"))
+                else if(type.equals("interstitial"))
                 {
                     Appodeal.initialize(activity, appKey, Appodeal.INTERSTITIAL);
                 }
