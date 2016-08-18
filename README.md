@@ -25,6 +25,16 @@ Avaliable Functions:
     
     appodeal.showInterstitialAndVideoAds()
     
+    appodeal.loadNonSkipVideoAd()
+    
+    appodeal.loadBannerAd()
+    
+    appodeal.loadInterstitialVideoAd()
+    
+    appodeal.loadRewardedVideoAd()
+    
+    appodeal.loadVideoAd()
+    
     appodeal.hideBannerAd()
     
     appodeal.hideVideoAd()
