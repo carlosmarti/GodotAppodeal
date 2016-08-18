@@ -51,6 +51,10 @@ Avaliable Functions:
     
     appodeal.isAnyAdLoaded() Boolean
     
+    appodeal.registerCallback()
+    
+    appodeal.unRegisterCallback()
+    
 Callback Functions:
 ---------------------
     _on_banner_loaded()
