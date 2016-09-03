@@ -35,7 +35,7 @@ public class GodotAppodeal extends Godot.SingletonBase {
                 "init", "showBannerAd", "showVideoAd", "showInterstitialAd", "showInterstitialAndVideoAds", "hideBannerAd",
                 "hideVideoAd", "hideInterstitialAd", "isBannerLoaded", "isVideoLoaded", "isInterstitialLoaded", "isAnyAdLoaded",
                 "isRewardedVideoLoaded", "showRewardedVideoAd", "showNonSkipVideoAd", "loadNonSkipVideoAd", "loadBannerAd",
-                "loadInterstitialVideoAd", "loadRewardedVideoAd", "loadVideoAdd",  "registerCallback", "unregisterCallback"
+                "loadInterstitialVideoAd", "loadRewardedVideoAd", "loadVideoAd",  "registerCallback", "unregisterCallback"
         });
 
         callbackFunctions = new HashMap<String, String>();
