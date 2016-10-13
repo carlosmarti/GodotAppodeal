@@ -121,6 +121,10 @@ public class GodotAppodeal extends Godot.SingletonBase {
                     Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
                     Appodeal.cache(activity, Appodeal.BANNER);
                     Appodeal.cache(activity, Appodeal.REWARDED_VIDEO);
+                } else if (type.equals("banner/interstitial")) {
+                    Appodeal.initialize(activity, appKey, Appodeal.BANNER | Appodeal.INTERSTITIAL);
+                    Appodeal.cache(activity, Appodeal.BANNER);
+                    Appodeal.cache(activity, Appodeal.INTERSTITIAL);
                 } else {
                     Log.d("godot", "Did not find a initialization type for :" + type);
                 }

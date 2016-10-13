@@ -11,7 +11,7 @@ Avaliable Functions:
     appodeal.init(instanceId, key, type, testing)
     - integer instanceId => use get_instance_ID()
     - string key => your appodeal key
-    - string type => valid values: "banner", "video", "interstitial", "interstitial/video", "banner/video", "rewardedvideo", "banner/rewardedvideo"
+    - string type => valid values: "banner", "video", "interstitial", "interstitial/video", "banner/video", "rewardedvideo", "banner/rewardedvideo", "banner/interstitial"
     - boolean testing => indicates if you are testing your app or not
     
     appodeal.showBannerAd(type)
