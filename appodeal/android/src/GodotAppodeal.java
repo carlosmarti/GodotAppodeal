@@ -420,7 +420,7 @@ public class GodotAppodeal extends Godot.SingletonBase {
             public void onRewardedVideoFinished(int amount, String name) {
 
                 showToastOnTesting(String.format("onRewardedVideoFinished. Reward: %d %s", amount, name));
-                runCallback(String.format("onRewardedVideoFinished. Reward: %d %s", amount, name));
+                runCallback("onRewardedVideoFinished");
             }
 
             @Override
