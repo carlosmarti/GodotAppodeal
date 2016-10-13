@@ -55,38 +55,60 @@ Avaliable Functions:
     
     appodeal.unRegisterCallback()
     
+
+
 Callback Functions:
 ---------------------
-    _on_banner_loaded()
-    
-    _on_banner_failed_to_load()
-    
-    _on_banner_shown()
-    
-    _on_banner_clicked()
-    
-    _on_video_loaded()
-    
-    _on_video_failed_to_load()
-    
-    _on_video_shown()
-    
-    _on_video_finished()
-    
-    _on_video_closed()
 
-    _on_rewarded_video_loaded()
+You should register your gdscript callbacks functions with registerCallback before use.
+Ex:
+    ```
+    (...)
+    appodeal.registerCallback("onInterstitialLoaded", "_my_callback")
+    (...)
 
-    _on_rewarded_video_failed_to_load()
+    func _my_callback():
+        print ("Interstitial was loaded")
+    ```    
 
-    _on_rewarded_video_finished(amount, name)
-    - integer amount
-    - string name
 
-    _on_rewarded_video_closed
-    
-    
-    
+    appodeal.registerCallback(callback_type, callback_function)
+    - string callback_type => valid values: 
+
+            "onInterstitialLoaded"
+            "onInterstitialFailedToLoad"
+            "onInterstitialShown"
+            "onInterstitialClicked"
+            "onInterstitialClosed"
+
+            "onBannerLoaded"
+            "onBannerFailedToLoad"
+            "onBannerShown"
+            "onBannerClicked"
+
+            "onSkippableVideoLoaded"
+            "onSkippableVideoFailedToLoad"
+            "onSkippableVideoShown"
+            "onSkippableVideoFinished"
+
+            "onSkippableVideoClosed"
+            "onNonSkippableVideoLoaded"
+            "onNonSkippableVideoFailedToLoad"
+            "onNonSkippableVideoShown"
+            "onNonSkippableVideoFinished"
+            "onNonSkippableVideoClosed"
+
+            "onRewardedVideoLoaded"
+            "onRewardedVideoFailedToLoad"
+            "onRewardedVideoShown"
+            "onRewardedVideoFinished"
+            "onRewardedVideoClosed"
+
+    - string callback_function => the name of your callback function
+
+    appodeal.unregisterCallback(callback_type)
+    - string callback_type => valid values: same as in registerCallback
+
 
 
 
