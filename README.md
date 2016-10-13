@@ -62,14 +62,14 @@ Callback Functions:
 
 You should register your gdscript callbacks functions with registerCallback before use.
 Ex:
-    ```
+    
     (...)
     appodeal.registerCallback("onInterstitialLoaded", "_my_callback")
     (...)
 
     func _my_callback():
         print ("Interstitial was loaded")
-    ```    
+      
 
 
     appodeal.registerCallback(callback_type, callback_function)
