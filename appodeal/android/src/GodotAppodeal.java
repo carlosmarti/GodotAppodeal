@@ -71,6 +71,7 @@ public class GodotAppodeal extends Godot.SingletonBase {
             public void run() {
                 appKey = key;
                 Appodeal.disableLocationPermissionCheck();
+                Appodeal.disableNetwork(activity, "cheetah");
                 //check string to see if it is a test or a normal initialization or a spacific initialization
                 if (testing) {
                     Appodeal.setTesting(true);
